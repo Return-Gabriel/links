@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Social Animation</title>
+
+  <!-- Font Awesome para os ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .me {
+      display: block;
+      margin: 2em auto 3em auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .social {
+      text-align: center;
+      font-size: 2.5em;
+      color: #555;
+      overflow: hidden;
+    }
+
+    .social a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .social i {
+      margin: 0.3em;
+      cursor: pointer;
+      transition: color 300ms ease, margin-top 300ms ease;
+      transform: translateZ(0);
+      position: relative;
+    }
+
+    .social i:hover {
+      margin-top: -1px;
+    }
+
+    .social #github:hover { color: black; }
+    .social #linkedin:hover { color: #0177B5; }
+    .social #code:hover { color: #29A329; }
+    .social #mail:hover { color: #F7B401; }
+  </style>
+</head>
+<body>
+
+  <img class="me" src="eu.png" alt="Foto de perfil" />
+
+  <div class="social">
+    <a href="https://github.com/Return-Gabriel" target="_blank">
+      <i id="github" class="fa fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/gabriel-santos-309932239/" target="_blank">
+      <i id="linkedin" class="fa fa-linkedin"></i>
+    </a>
+    <a href="https://return-gabriel.github.io/portfolio.GitHub.io/#about" target="_blank">
+      <i id="code" class="fa fa-code"></i>
+    </a>
+    <a href="mailto:alves.santos.biel@gmail.com">
+      <i id="mail" class="fa fa-envelope"></i>
+    </a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('i').hide();
+    });
+
+    $(window).on("load", function () {
+      $('i').show();
+
+      const githubPos = $('#github').position();
+      const linkedinPos = $('#linkedin').position();
+      const codePos = $('#code').position();
+      const mailPos = $('#mail').position();
+      const imgPos = $('.me').position();
+
+      $('i').css({
+        position: 'absolute',
+        zIndex: '1',
+        top: imgPos.top + 100,
+        left: '47%'
+      });
+
+      setTimeout(() => {
+        $('#github').animate({ top: githubPos.top + 10, left: githubPos.left - 6 }, 500);
+      }, 250);
+
+      setTimeout(() => {
+        $('#github').animate({ top: githubPos.top, left: githubPos.left }, 250);
+        $('#linkedin').animate({ top: linkedinPos.top + 10, left: linkedinPos.left }, 500);
+      }, 500);
+
+      setTimeout(() => {
+        $('#linkedin').animate({ top: linkedinPos.top, left: linkedinPos.left }, 250);
+        $('#code').animate({ top: codePos.top + 10, left: codePos.left + 3 }, 500);
+      }, 750);
+
+      setTimeout(() => {
+        $('#code').animate({ top: codePos.top, left: codePos.left }, 250);
+        $('#mail').animate({ top: mailPos.top + 10, left: mailPos.left + 10 }, 500);
+      }, 1000);
+
+      setTimeout(() => {
+        $('#mail').animate({ top: mailPos.top, left: mailPos.left }, 250, function () {
+          $('i').css({
+            position: 'relative',
+            top: '',
+            left: '',
+            zIndex: ''
+          });
+        });
+      }, 1250);
+    });
+  </script>
+
+</body>
+</html>
